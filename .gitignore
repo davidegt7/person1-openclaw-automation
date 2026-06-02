@@ -1,0 +1,20 @@
+# State from running bridges (transcripts can be large + contain private agent thoughts)
+**/.openclaw-person1/sessions/**/state/
+**/*-state/
+**/state/transcript.log
+**/state/input.fifo
+**/state/status.txt
+
+# Local logs
+*.log
+/tmp/*
+/private/tmp/*
+
+# OS
+.DS_Store
+._*
+
+# Editor
+.idea/
+.vscode/
+*.swp
