@@ -272,6 +272,35 @@ Then consider committing updates here if they improve the automation core.
 - After gateway / config changes, start a **fresh** openclaw session (new --session name) so the sandbox/tool context picks up the new browser defaults.
 - Snapshots can be slow; use them when you need the a11y/aria tree for clicking.
 
+## Durable automation login profile
+
+Use this profile as the consistent, logged-in automation browser:
+
+```text
+~/Library/Application Support/Google/Chrome-OpenClawAutomation
+```
+
+Do not use temp Chrome profiles for account workflows. Temp profiles are useful for CDP tests, but their cookies disappear. The durable automation profile should be launched with:
+
+```bash
+~/person1-openclaw-automation/bin/start-chrome-person1-debug.sh https://www.instagram.com/
+```
+
+To open the normal login set for manual sign-in:
+
+```bash
+~/person1-openclaw-automation/bin/open-login-set.sh
+```
+
+Then manually sign into the services you want agents to reuse, such as Instagram, X, Gmail, Notion, Canva, and ChatGPT. Leave the profile open while automation runs. When done, quit this automation Chrome normally so cookies flush cleanly to disk.
+
+Health check:
+
+```bash
+curl -s http://127.0.0.1:9222/json/version
+curl -s http://127.0.0.1:9222/json/list
+```
+
 ## Making this portable / your machine
 
 The scripts use `$HOME` everywhere. Clone this repo to `~/person1-openclaw-automation` (or anywhere) and the launchers will still work as long as:

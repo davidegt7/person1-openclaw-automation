@@ -28,10 +28,17 @@ LOG_FILE="${TMPDIR:-/tmp}/person1-chrome-debug.log"
 
 mkdir -p "$(dirname "$USER_DATA_DIR")"
 
+START_URL="${1:-about:blank}"
+
 echo "[$(date)] Starting Person 1 Chrome debug instance..." | tee -a "$LOG_FILE"
 
-exec /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
+open -na "Google Chrome" --args \
   --remote-debugging-port=9222 \
   --user-data-dir="$USER_DATA_DIR" \
   --profile-directory=Default \
+  --no-first-run \
+  --no-default-browser-check \
+  --new-window "$START_URL" \
   >>"$LOG_FILE" 2>&1
+
+echo "[$(date)] Launch request sent for $START_URL" | tee -a "$LOG_FILE"
